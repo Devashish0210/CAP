@@ -1,0 +1,44 @@
+"use client";
+import { Navbar } from "@nextui-org/react";
+import handleLogout from "../employee-verification/_api-helpers/Logout";
+import { useAppDispatch } from "@/redux-toolkit/hooks";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+
+export default function NavBar() {
+  const dispatch = useAppDispatch();
+  return (
+    <>
+      <div className="w-full">
+        <Navbar
+          className="shadow-md"
+          classNames={{ wrapper: "px-0 max-w-full" }}
+        >
+          <div className="flex h-full w-full justify-between items-center  px-8">
+            <div className="flex gap-4 items-center justify-start">
+              <Link href="https://www.microland.com">
+                <img
+                  src="/microland-logo-main.png"
+                  alt="Logo"
+                  className="h-6 object-contain"
+                />
+              </Link>
+              <p className="text-3xl font-thin">|</p>
+              <Link href="/" className="text-black">
+                <p className="font-semibold text-xl">Alumni Services</p>
+              </Link>
+            </div>
+            <div className="flex items-center justify-center">
+              <p
+                onClick={() => handleLogout(dispatch)}
+                className="flex justify-center items-center cursor-pointer"
+              >
+                <span className="material-symbols-outlined">logout</span>Logout
+              </p>
+            </div>
+          </div>
+        </Navbar>
+      </div>
+    </>
+  );
+}
