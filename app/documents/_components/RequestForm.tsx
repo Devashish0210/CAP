@@ -17,7 +17,7 @@ export default function RequestForm() {
   });
   return (
     <div className="flex flex-col justify-center items-center">
-      <p className="font-bold text-left">
+      <p className="font-bold text-left mr-28 pr-24">
         Please select from the below document options to send at your email
         address
       </p>

@@ -14,7 +14,7 @@ import { InitialState as Items } from "@/redux-toolkit/features/ndc";
 
 export default function TableCustom({ items }: { items: Items }) {
   return (
-    <Table aria-label="NDC TABLE">
+    <Table isStriped aria-label="NDC TABLE">
       <TableHeader>
         <TableColumn className="text-cyan-800 font-bold">NDC Owner</TableColumn>
         <TableColumn className="text-cyan-800 font-bold">Status</TableColumn>

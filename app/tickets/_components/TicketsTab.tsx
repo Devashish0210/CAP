@@ -65,6 +65,18 @@ export default function DocumentsTab() {
           title={
             <div className="flex justify-center items-center">
               <p>Status of Tickets </p>
+            </div>
+          }
+        >
+          <TableCustom items={ticketStatus} />
+        </Tab>
+
+        {/* New Tab for the reload icon */}
+        <Tab
+          key="reload"
+          title={
+            <div className="flex justify-center items-center">
+              <p>Refresh</p>
               <div
                 className="min-w-0 w-8 h-8 ml-2 rounded-full bg-white cursor-pointer flex justify-center items-center"
                 onClick={
@@ -89,15 +101,13 @@ export default function DocumentsTab() {
                   </motion.span>
                 ) : (
                   <span className="material-symbols-outlined text-primary">
-                    replay
+                    refresh
                   </span>
                 )}
               </div>
             </div>
           }
-        >
-          <TableCustom items={ticketStatus} />
-        </Tab>
+        />
       </Tabs>
     </div>
   );

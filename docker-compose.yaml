@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  alumni-fe:
+    image: aicoedevconreg.azurecr.io/alumni_fe/alumni_fe:14.5
+    ports:
+      - "3001:3001"
+    # volumes:
+    #   - .:/app  # Mount the current directory as /app inside the container (for development)
+    environment:
+      # Add environment variables here (optional)
+      PORT: 3001  # Example environment variable

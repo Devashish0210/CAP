@@ -37,6 +37,7 @@ export default function CardCustom({
     const wait = async () => {
       //@ts-ignore
       const res = await RequestDocument(
+        //@ts-ignore
         doc_type_map[header],
         employeeLoginState,
         dispatch,

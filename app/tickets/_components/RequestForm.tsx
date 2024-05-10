@@ -17,12 +17,14 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { DropzoneArea } from "mui-file-dropzone";
+import { useDropzone } from "react-dropzone";
 import LoadingButton from "./LoadingButton";
 import getSMC from "../_api-helpers/smc-cat";
 import { useRouter } from "next/navigation";
 import { setState } from "@/redux-toolkit/features/create-ticket";
 import createTickets from "../_api-helpers/create-ticket";
 import DropdownCustom from "./Dropdown";
+import MyDropzone from "./CustomDropzone";
 
 // Define the RequestForm component
 export default function RequestForm() {
@@ -127,6 +129,7 @@ export default function RequestForm() {
       console.log(dataCreateTicket);
       //@ts-ignore
       const d = await createTickets(
+        //@ts-ignore
         dataCreateTicket,
         employeeLoginState,
         dispatch,
@@ -144,6 +147,7 @@ export default function RequestForm() {
     };
     handleVerifyRequest();
   };
+
   return formLoading ? (
     <div className="flex justify-center items-center w-auto flex-col gap-2 py-32">
       <h1 className="text-primary text-xl">Alumni Services</h1>
@@ -185,18 +189,6 @@ export default function RequestForm() {
             options={Object.keys(ticketData.data)}
           />
         </div>
-        {/* <Input required
-                    minLength={3}
-                    value={title}
-                    onChange={(e) => {
-                        setTitle(e.target.value)
-                    }} classNames={{
-                        input: "ml-4 mb-0",
-                        inputWrapper: "h-20"
-                    }} startContent={<span className="material-symbols-outlined">
-                        title
-                    </span>} type="text"
-                    label="Title" placeholder="Enter a title for the ticket" /> */}
 
         <div className={"flex w-full rounded-sm p-4"}>
           {/* @ts-ignore */}
@@ -237,10 +229,12 @@ export default function RequestForm() {
             selectedCategory === null ||
             typeof selectedCategory === "undefined"
               ? "hidden"
-              : ticketData.data[selectedCategory]["attachment_message"] ===
-                  "" ||
+              : //@ts-ignore
+              ticketData.data[selectedCategory]["attachment_message"] === "" ||
+                //@ts-ignore
                 ticketData.data[selectedCategory]["attachment_message"] ===
                   null ||
+                //@ts-ignore
                 typeof ticketData.data[selectedCategory][
                   "attachment_message"
                 ] === "undefined"
@@ -256,7 +250,8 @@ export default function RequestForm() {
             selectedCategory === null ||
             typeof selectedCategory === "undefined"
               ? ""
-              : ticketData.data[selectedCategory]["attachment_message"]}
+              : //@ts-ignore
+                ticketData.data[selectedCategory]["attachment_message"]}
           </p>
         </div>
         <div className={"flex w-full rounded-sm p-4"}>
@@ -265,7 +260,7 @@ export default function RequestForm() {
             <span className="font-bold pr-4">Attachment</span>
           </p>
           {/* @ts-ignore */}
-          <DropzoneArea
+          {/* <DropzoneArea
             size="sm"
             Icon={"AttachFileIcon"}
             acceptedFiles={[
@@ -295,7 +290,8 @@ export default function RequestForm() {
               setFiles(filesReceived);
             }}
             filesLimit={1}
-          />
+          /> */}
+          <MyDropzone setFiles={setFiles} />
         </div>
         <div className="w-full">
           <LoadingButton

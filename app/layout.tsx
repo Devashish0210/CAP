@@ -15,9 +15,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "HR rewrite policy",
-  description:
-    "Extracts the texts from the doc and rewrites it accoridng to the promt given",
+  title: "Microland | Alumni Portal",
+  description: "Microland's Alumni Portal",
   icons: {
     icon: "https://www.microland.com/assets/images/favicon.png",
   },

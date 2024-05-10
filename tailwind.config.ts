@@ -26,6 +26,7 @@ const config: Config = {
             primary: { DEFAULT: "#E53526", foreground: "#FFFFFF" },
             secondary: "#5591B7",
             content2: {
+              //@ts-ignore
               tertiary: "#3A3A3A",
               textSecondary: "#ADADAD",
               text: "#181818",

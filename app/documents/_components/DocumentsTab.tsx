@@ -140,42 +140,44 @@ export default function DocumentsTab({
             )}
 
             {/* New Tab for the reload icon */}
-            <Tab
-              key="reload"
-              title={
-                <div className="flex justify-center items-center">
-                  <p>Refresh</p>
-                  <div
-                    className="min-w-0 w-8 h-8 ml-2 rounded-full bg-white cursor-pointer flex justify-center items-center"
-                    onClick={
-                      reloadLoading
-                        ? () => {
-                            console.log("disabled");
-                          }
-                        : handleReloadClick
-                    }
-                  >
-                    {reloadLoading ? (
-                      <motion.span
-                        className="material-symbols-outlined text-primary"
-                        animate={{ rotate: -360 }}
-                        transition={{
-                          repeatType: "loop",
-                          repeat: Infinity,
-                          duration: 2,
-                        }}
-                      >
-                        replay
-                      </motion.span>
-                    ) : (
-                      <span className="material-symbols-outlined text-primary">
-                        refresh
-                      </span>
-                    )}
+            {true && (
+              <Tab
+                key="reload"
+                title={
+                  <div className="flex justify-center items-center">
+                    <p>Refresh</p>
+                    <div
+                      className="min-w-0 w-8 h-8 ml-2 rounded-full bg-white cursor-pointer flex justify-center items-center"
+                      onClick={
+                        reloadLoading
+                          ? () => {
+                              console.log("disabled");
+                            }
+                          : handleReloadClick
+                      }
+                    >
+                      {reloadLoading ? (
+                        <motion.span
+                          className="material-symbols-outlined text-primary"
+                          animate={{ rotate: -360 }}
+                          transition={{
+                            repeatType: "loop",
+                            repeat: Infinity,
+                            duration: 2,
+                          }}
+                        >
+                          replay
+                        </motion.span>
+                      ) : (
+                        <span className="material-symbols-outlined text-primary">
+                          refresh
+                        </span>
+                      )}
+                    </div>
                   </div>
-                </div>
-              }
-            />
+                }
+              />
+            )}
           </Tabs>
         </>
       )}

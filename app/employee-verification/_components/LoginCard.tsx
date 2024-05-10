@@ -37,6 +37,7 @@ export default function EmailComponentMobile({
 
   return (
     <div className="flex justify-center items-center flex-col">
+      
       {loading ? (
         <Card className="min-w-[23rem] min-h-[15rem] flex justify-center items-center">
           <Spinner color="primary" />
