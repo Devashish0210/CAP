@@ -8,7 +8,7 @@ const ActionsPage = () => {
         {/* <div className="w-[90%] mx-auto my-8">
                     <p>We are happy to have you here, please use the following options to proceed</p>
                 </div> */}
-        <div className="flex justify-evenly items-center w-full gap-3 mt-16 mb-10 mr-24">
+        <div className="flex flex-col justify-evenly items-center w-full gap-3 mt-16 mb-10 mr-24 sm:flex-row sm:mb-0 sm:mr-0">
           <DetailsCard />
           <CardLink
             href="/documents"

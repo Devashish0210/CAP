@@ -92,7 +92,7 @@ export default function DocumentsTab({
     <div className="w-full">
       {ndc.isLoading ? (
         <div className="w-full h-[68vh] flex flex-col justify-center items-center">
-          <h1 className="text-primary text-2xl mb-1">Fetching Data</h1>
+          <h1 className="text-primary text-2xl mb-1">Loading</h1>
           <Spinner color="primary" size="md" />
         </div>
       ) : (

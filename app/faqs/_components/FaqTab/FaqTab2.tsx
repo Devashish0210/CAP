@@ -76,7 +76,7 @@ export default function FaqTab() {
   return loading ? (
     <div className="w-full h-72 flex justify-center items-center">
       {" "}
-      <h1 className="text-primary text-2xl mb-1">Fetching Data</h1>{" "}
+      <h1 className="text-primary text-2xl mb-1">Loading</h1>{" "}
       <Spinner color="primary" size="lg" />
     </div>
   ) : (
