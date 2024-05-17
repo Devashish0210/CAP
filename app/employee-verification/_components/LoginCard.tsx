@@ -59,7 +59,7 @@ export default function EmailComponentMobile({
               type="email"
               // label="Email"
               variant="underlined"
-              placeholder=" Enter your Personal Email ID"
+              placeholder="Please enter your Email ID"
               startContent={
                 <span className="material-symbols-outlined">mail</span>
               }

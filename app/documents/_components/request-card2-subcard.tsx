@@ -57,7 +57,7 @@ export default function CardCustom({
     <Card className="w-[22rem] bg-background-containerHigh shadow-none">
       <CardBody className="flex flex-col">
         <Button
-          className="w-[90%] bg-gray-200 flex items-center justify-start rounded-sm"
+          className="w-[90%] bg-white flex items-center justify-start rounded-sm"
           style={{ textAlign: "left" }}
           onClick={handleButtonClick}
           isDisabled={loading}

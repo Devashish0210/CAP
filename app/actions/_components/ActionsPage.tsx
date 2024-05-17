@@ -12,7 +12,7 @@ const ActionsPage = () => {
           <DetailsCard />
           <CardLink
             href="/documents"
-            bodyText="Request a copy of your documents like PF Statement, Payslips, Relieving Letter, etc."
+            bodyText="Request a copy of your documents such as PF Statement, Payslips, Relieving Letter, etc."
             headerText="Self-Service"
             className="bg-[#5591B7] text-background w-[15rem] h-[25rem] rounded-sm"
             icon="self-service.png"

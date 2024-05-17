@@ -14,8 +14,8 @@ const LoginPage = () => {
         <div className="w-full flex flex-wrap h-full items-center justify-evenly">
           <div className="text-[3rem]">
             <h1>Welcome to</h1>
-            <h1>Microland Alumni</h1>
-            <h1>Community</h1>
+            <h1>Microland Alumni Community</h1>
+            
           </div>
           <div>
             <LoginCard />

@@ -29,7 +29,7 @@ export default function CardLink({
         <CardHeader className="flex justify-center items-center">
           <p className="text-3xl">{headerText}</p>
         </CardHeader>
-        <CardBody className="flex justify-evenly items-center">
+        <CardBody className="flex items-center">
           <p className="text-md">{bodyText}</p>
           <img src={icon} />
         </CardBody>

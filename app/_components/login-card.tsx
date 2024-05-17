@@ -106,7 +106,7 @@ export default function LoginCard() {
                   }}
                   type="email"
                   // label="Email"
-                  placeholder=" Enter your Personal Email ID"
+                  placeholder="Please enter your Email ID"
                   startContent={
                     <span className="material-symbols-outlined">mail</span>
                   }

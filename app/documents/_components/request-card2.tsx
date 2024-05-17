@@ -12,7 +12,7 @@ export default function CardCustom({ header, items, buttonText }: CardProps) {
   return (
     <Card className="flex-1 min-h-[22rem] bg-background-containerHigh shadow-none">
       <CardHeader className="flex justify-center items-center pr-12">
-        <p className="font-bold text-cyan-800 text-lg bg-gray-200 px-12 py-1">
+        <p className="font-bold text-cyan-800 text-lg bg-gray-200 px-8 py-1">
           {header}
         </p>
       </CardHeader>

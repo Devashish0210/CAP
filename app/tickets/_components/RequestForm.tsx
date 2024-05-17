@@ -213,9 +213,7 @@ export default function RequestForm() {
               <p className="text-sm mt-2">
                 <span className="font-bold">Note:</span>{" "}
                 <span className="italic">
-                  Refer the FAQs. Please initiate the PF Transfer process on the
-                  EPFO portal, attach the signed and scanned Form 13. It will
-                  take 15 working days to complete the PF Transfer process.
+                Refer the FAQs. Please initiate the PF Transfer process on the EPFO portal, attach the signed and scanned Form 13. and It will take 15 working days to complete the PF Transfer process.
                 </span>
               </p>
             </div>

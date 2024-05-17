@@ -59,7 +59,7 @@ export default function MyDropzone({
         {...getRootProps({
           className: isUploaded
             ? "border-solid border-3 h-9 bg-success p-5  text-white flex justify-center items-center rounded-lg bg-[#F4F4F5]"
-            : "h-9 p-5 flex justify-start items-center bg-[#F4F4F5] w-full",
+            : "h-9 p-6 flex justify-start items-center bg-[#F4F4F5] w-full",
         })}
       >
         <input {...getInputProps()} />
