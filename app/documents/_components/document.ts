@@ -1,7 +1,7 @@
 export const documents: DocumentListTypes = {
     "Financial Documents": [
         { label: "Payslips", description: "Please click on the request button to email your Payslips to your email address", note: "Payslips for last six months during your employment at Microland." },
-        { label: "Form 16", description: "Please click on the request button to email your Form 16 to your email address ", note: "Form 16 for last two financial years during your employment at Microland." },
+        { label: "Form 16", description: "Please click on the request button to email your Form 16 to your email address ", note: "Form 16 for last two financial years during your employment at Microland. Form 16 will be accessible by mid-June of the respective assessment year." },
         { label: "PF Statement", description: "Please click on the request button to email your PF Statement to your email address", note: "PF statement for the last month of your employment at Microland." },
     ],
     "Exit Documents": [

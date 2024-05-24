@@ -5,7 +5,7 @@ const LoginPage = () => {
     <>
       <section className="h-[90vh] w-full">
         <div
-          className="absolute h-full w-full blur-lg -z-40"
+          className="absolute h-full w-full blur-md -z-40"
           style={{
             backgroundImage: "url('background-login.png')",
             backgroundSize: "100vw 90vh",

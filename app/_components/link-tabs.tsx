@@ -26,7 +26,7 @@ export default function LinkTabs({
       {data.map((value, index) => {
         return index === selected ? (
           <div className="flex flex-col justify-center items-start gap-2">
-            <div className="h-8 w-[20rem] p-4">
+            <div className="h-8 w-full p-4">
               {index === 0 && <NameComponent />}
             </div>
             <Link href={value.href} className="text-white" key={index}>

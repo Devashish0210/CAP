@@ -16,11 +16,11 @@ export default function DetailsCard() {
               {employeeDetails.empID}
             </p>
             <p>
-              <span className="font-bold">DOJ: </span>
+              <span className="font-bold">Joining Date: </span>
               {employeeDetails.doj}
             </p>
             <p>
-              <span className="font-bold">LWD: </span>
+              <span className="font-bold">Exit Date: </span>
               {employeeDetails.lwd}
             </p>
           </div>
