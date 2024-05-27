@@ -76,7 +76,7 @@ export default function CardCustom({
             className={
               documentResponseText[header] ===
               "There is some problem processing your request, please try again later"
-                ? "text-danger w-80 mt-2"
+                ? "text-danger w-80 mt-2 pl-4 text-sm"
                 : "text-success w-80 mt-2 pl-4 text-sm"
             }
           >

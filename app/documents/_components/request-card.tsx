@@ -26,7 +26,7 @@ export default function CardCustom({ header, body, onButtonClick, buttonText, no
                 <p className="font-bold text-xl">{header}</p>
             </CardHeader>
             <CardBody className="flex items-center justify-center">
-                <p className="font-semibold text-sm mx-2">{body}</p>
+                <p  className="font-semibold text-lg mx-2">{body}</p>
                 <p className="text-[0.6rem] mt-2 text-danger font-bold">{note.length > 0 ? "Note: " + note : ""}</p>
             </CardBody>
             <CardFooter className="flex items-center justify-center">
