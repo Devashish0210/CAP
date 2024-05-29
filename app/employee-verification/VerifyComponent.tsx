@@ -32,7 +32,7 @@ export default function VerifyComponent() {
       <div
         className="absolute h-full w-full blur-lg -z-40"
         style={{
-          backgroundImage: "url('background-login.png')",
+          backgroundImage: "url('background-employee-verification.jpg')",
           backgroundSize: "100vw 90vh",
         }}
       />
@@ -66,8 +66,7 @@ export default function VerifyComponent() {
           <section className="h-[90vh] w-full flex flex-wrap items-center justify-evenly">
             <div className="text-[3rem]">
               <h1>Welcome to</h1>
-              <h1>Employment</h1>
-              <h1>Verification</h1>
+              <h1>Employment Verification</h1>
               <h1>Services</h1>
             </div>
             {!showOtp ? (

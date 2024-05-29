@@ -7,15 +7,15 @@ const LoginPage = () => {
         <div
           className="absolute h-full w-full blur-md -z-40"
           style={{
-            backgroundImage: "url('background-login.png')",
+            backgroundImage: "url('background-login.jpg')",
             backgroundSize: "100vw 90vh",
           }}
         />
         <div className="w-full flex flex-wrap h-full items-center justify-evenly">
-          <div className="text-[3rem]">
+          <div className="text-[3rem] pr-24">
             <h1>Welcome to</h1>
-            <h1>Microland Alumni Community</h1>
-            
+            <h1>Microland Alumni</h1>
+            <h1>Community</h1>
           </div>
           <div>
             <LoginCard />

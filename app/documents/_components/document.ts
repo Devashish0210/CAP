@@ -5,8 +5,8 @@ export const documents: DocumentListTypes = {
         { label: "PF Statement", description: "Please click on the request button to email your PF Statement to your email address", note: "PF statement for the last month of your employment at Microland." },
     ],
     "Exit Documents": [
-        { label: "Full and Final Statement (FFS)", description: "Please click on the request button to email your Full and Final Statement to your email address,", note: "Once the NDC process is closed, you can access your Full and Final settlement." },
-        { label: "Service Letter", description: "Please click on the request button to email your Service Letter to your email address", note: "For involuntary exit, you will be able to access the No Dues Clearance Certificate." },
+        { label: "Full and Final Statement", description: "Please click on the request button to email your Full and Final Statement to your email address,", note: "Full and Final Statement will be accessible once the NDC process is completed." },
+        { label: "Service Letter/No Dues Clearance", description: "Please click on the request button to email your Service Letter to your email address", note: "Letter will be accessible once the NDC process is completed." },
         { label: "Relieving Letter", description: "Please click on the request button to email your Relieving Letter to your email address", note: "Relieving letter will be accessible one day after your Last Working Day." },
     ]
 };

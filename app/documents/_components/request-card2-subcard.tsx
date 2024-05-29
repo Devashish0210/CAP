@@ -50,40 +50,50 @@ export default function CardCustom({
           : `There is some problem processing your request, please try again later`, // Update specific property using name and value
       });
       setLoading(false);
+
+      // Clear the message after 3 seconds
+      setTimeout(() => {
+        setDocumentResponseText({
+          ...documentResponseText,
+          [header]: "",
+        });
+      }, 3000);
     };
     wait();
   };
   return (
-    <Card className="w-[22rem] bg-background-containerHigh shadow-none">
-      <CardBody className="flex flex-col">
-        <Button
-          className="w-[90%] bg-white flex items-center justify-start rounded-sm"
-          style={{ textAlign: "left" }}
-          onClick={handleButtonClick}
-          isDisabled={loading}
-        >
-          {loading ? (
-            <Spinner color="default" size="sm" />
-          ) : (
-            <p className="font-bold text-md text-blue-300">{header}</p>
-          )}
-        </Button>
-        {note.length > 0 && (
-          <p className="text-sm px-4">{note.length > 0 ? note : ""}</p>
-        )}
-        {documentResponseText[header] !== "" && (
-          <p
-            className={
-              documentResponseText[header] ===
-              "There is some problem processing your request, please try again later"
-                ? "text-danger w-80 mt-2 pl-4 text-sm"
-                : "text-success w-80 mt-2 pl-4 text-sm"
-            }
+    <div style={{ maxHeight: "200px", overflow: "auto" }}>
+      <Card className="w-[22rem] bg-background-containerHigh shadow-none">
+        <CardBody className="flex flex-col">
+          <Button
+            className="w-[100%] bg-white flex items-center justify-start rounded-sm"
+            style={{ textAlign: "left" }}
+            onClick={handleButtonClick}
+            isDisabled={loading}
           >
-            {documentResponseText[header]}
-          </p>
-        )}
-      </CardBody>
-    </Card>
+            {loading ? (
+              <Spinner color="default" size="sm" />
+            ) : (
+              <p className="font-bold text-md text-blue-300">{header}</p>
+            )}
+          </Button>
+          {note.length > 0 && (
+            <p className="text-sm px-4">{note.length > 0 ? note : ""}</p>
+          )}
+          {documentResponseText[header] !== "" && (
+            <p
+              className={
+                documentResponseText[header] ===
+                "There is some problem processing your request, please try again later"
+                  ? "text-danger w-80 mt-2 pl-4 text-sm"
+                  : "text-success w-80 mt-2 pl-4 text-sm"
+              }
+            >
+              {documentResponseText[header]}
+            </p>
+          )}
+        </CardBody>
+      </Card>
+    </div>
   );
 }
