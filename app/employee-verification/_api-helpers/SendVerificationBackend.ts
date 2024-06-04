@@ -14,7 +14,7 @@ const sendVerificationToBackend = async (
 ) => {
   try {
     const dateList = lastWorkingDay.toLocaleDateString().split("/");
-    const formattedDate = dateList[2] + "-" + dateList[0] + "-" + dateList[1];
+    const formattedDate = dateList[2] + "-" + dateList[1] + "-" + dateList[0];
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_BGV_REQUEST_ENDPOINT}`,
       {

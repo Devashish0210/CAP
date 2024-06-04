@@ -6,7 +6,7 @@ export const documents: DocumentListTypes = {
     ],
     "Exit Documents": [
         { label: "Full and Final Statement", description: "Please click on the request button to email your Full and Final Statement to your email address,", note: "Full and Final Statement will be accessible once the NDC process is completed." },
-        { label: "Service Letter/No Dues Clearance", description: "Please click on the request button to email your Service Letter to your email address", note: "Letter will be accessible once the NDC process is completed." },
+        { label: "Service Letter", description: "Please click on the request button to email your Service Letter to your email address", note: "Service Letter will be accessible once NDC process is completed and FNF is positive." },
         { label: "Relieving Letter", description: "Please click on the request button to email your Relieving Letter to your email address", note: "Relieving letter will be accessible one day after your Last Working Day." },
     ]
 };
