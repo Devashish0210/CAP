@@ -13,6 +13,9 @@ import { Spinner } from "@nextui-org/react";
 import { doc_type_map, documents, document_types } from "./document";
 import { useAppDispatch, useAppSelector } from "@/redux-toolkit/hooks";
 import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 type CardProps = {
   header: string;
   buttonText: string;
@@ -32,35 +35,40 @@ export default function CardCustom({
   const router = useRouter();
   const [documentResponseText, setDocumentResponseText] =
     useState(document_types);
-  const handleButtonClick = async () => {
-    setLoading(true);
-    const wait = async () => {
-      //@ts-ignore
-      const res = await RequestDocument(
-        //@ts-ignore
-        doc_type_map[header],
-        employeeLoginState,
-        dispatch,
-        router
-      );
-      setDocumentResponseText({
-        ...documentResponseText,
-        [header]: res
-          ? `Request is processed, details are sent at your email address.`
-          : `There is some problem processing your request, please try again later`, // Update specific property using name and value
-      });
-      setLoading(false);
-
-      // Clear the message after 3 seconds
-      setTimeout(() => {
-        setDocumentResponseText({
-          ...documentResponseText,
-          [header]: "",
-        });
-      }, 3000);
-    };
-    wait();
-  };
+    const handleButtonClick = async () => {
+      setLoading(true);
+      const wait = async () => {
+        const res = await RequestDocument(
+          //@ts-ignore
+          doc_type_map[header],
+          employeeLoginState,
+          dispatch,
+          router
+        );
+        setLoading(false);
+    
+        if (res) {
+          toast.success("Request is processed, details are sent at your email address.", {
+            onClose: () => {
+              setDocumentResponseText({
+                ...documentResponseText,
+                [header]: "Request is processed, details are sent at your email address."
+              });
+            }
+          });
+        } else {
+          toast.error("There is some problem processing your request, please try again later", {
+            onClose: () => {
+              setDocumentResponseText({
+                ...documentResponseText,
+                [header]: "There is some problem processing your request, please try again later"
+              });
+            }
+          });
+        }
+      };
+      wait();
+    };    
   return (
     <div style={{ maxHeight: "200px", overflow: "auto" }}>
       <Card className="w-[22rem] bg-background-containerHigh shadow-none">
@@ -77,10 +85,11 @@ export default function CardCustom({
               <p className="font-bold text-md text-blue-300">{header}</p>
             )}
           </Button>
+          
           {note.length > 0 && (
             <p className="text-sm px-4">{note.length > 0 ? note : ""}</p>
           )}
-          {documentResponseText[header] !== "" && (
+          {/* {documentResponseText[header] !== "" && (
             <p
               className={
                 documentResponseText[header] ===
@@ -91,7 +100,7 @@ export default function CardCustom({
             >
               {documentResponseText[header]}
             </p>
-          )}
+          )} */}
         </CardBody>
       </Card>
     </div>

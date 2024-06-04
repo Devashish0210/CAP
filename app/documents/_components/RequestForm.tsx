@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 import { documents } from "./document";
 import CardCustom from "./request-card2";
 
@@ -20,6 +21,7 @@ export default function RequestForm() {
       <p className="font-bold text-left mr-28 pr-20">Please choose one of the document options below to be sent to your email address</p>
       <div className="flex flex-wrap m-4 gap-16 w-full justify-around items-center">
         {cards}
+        <ToastContainer/>
       </div>
     </div>
   );
