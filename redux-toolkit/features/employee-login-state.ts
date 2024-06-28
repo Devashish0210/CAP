@@ -8,6 +8,7 @@ export type InitialState = {
     email: string
     empID: string
     accountNumber: string
+    panNumber: string,
     otp: string | null
 }
 
@@ -15,6 +16,7 @@ const initialState: InitialState = employeeLoginState ? JSON.parse(employeeLogin
     email: "",
     empID: "",
     accountNumber: "",
+    panNumber: "",
     otp: null
 }
 

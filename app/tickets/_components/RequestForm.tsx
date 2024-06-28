@@ -209,14 +209,14 @@ export default function RequestForm() {
               type="text"
               placeholder="Enter a brief description of your request"
             />
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <p className="text-sm mt-2">
                 <span className="font-bold">Note:</span>{" "}
                 <span className="italic">
                 Refer the FAQs. Please initiate the PF Transfer process on the EPFO portal, attach the signed and scanned Form 13. and It will take 15 working days to complete the PF Transfer process.
                 </span>
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* @ts-ignore */}

@@ -8,6 +8,7 @@ import HtmlComponent from "./_components/htmlcomponent";
 import NavBar from "./_layout_components/navbar";
 import Footer from "./_layout_components/footer";
 import PageContainer from "./_layout_components/page-container";
+import { MantineProvider } from "@mantine/core";
 
 const poppins = Poppins({
   subsets: ["latin"],

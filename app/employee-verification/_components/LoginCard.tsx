@@ -5,6 +5,12 @@ import RecaptchaComponent from "./RecaptchaComponent";
 import { useState } from "react";
 import { Button, Card, Input, Spinner } from "@nextui-org/react";
 import { setState } from "@/redux-toolkit/features/employer-login-state";
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
+
+
 export default function EmailComponentMobile({
   handleProceedClick,
   isCapctha,
@@ -26,18 +32,24 @@ export default function EmailComponentMobile({
   const [errorText, setErrorText] = useState("");
   const [emailError, setEmailError] = useState("");
   const [email, setEmail] = useState("");
+  const [dob, setDob] = useState(null); // Add state for Date of Birth
+
   const handleEmailChange = (event: any) => {
     const newEmail = event.target.value;
     setEmail(newEmail);
     validateEmail(newEmail)
       ? setEmailError("")
       : setEmailError("Email entered is invalid");
-    dispatch(setState({ email: newEmail, otp: employerLoginState.otp }));
+    dispatch(setState({ email: newEmail, otp: employerLoginState.otp}));
+  };
+
+  const handleDobChange = (date: any) => {
+    setDob(date);
+    //dispatch(setState({ email, otp: employerLoginState.otp, dob: date }));
   };
 
   return (
     <div className="flex justify-center items-center flex-col">
-      
       {loading ? (
         <Card className="min-w-[23rem] min-h-[15rem] flex justify-center items-center">
           <Spinner color="primary" />
@@ -53,7 +65,7 @@ export default function EmailComponentMobile({
               onChange={handleEmailChange}
               required
               classNames={{
-                input: "ml-4 mb-0",
+                input: "ml-2 mb-0",
                 inputWrapper: "h-10",
               }}
               type="email"
@@ -64,7 +76,6 @@ export default function EmailComponentMobile({
                 <span className="material-symbols-outlined">mail</span>
               }
             />
-
             <Button
               color="primary"
               className="mb-4"

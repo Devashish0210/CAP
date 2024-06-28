@@ -6,7 +6,8 @@ const sendEmailToServer = async (employeeLoginState: InitialState) => {
         const response = await axios.post(process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/alumni/generate-otp", {
             "email": employeeLoginState.email,
             "employee_id": employeeLoginState.empID,
-            "bank_acct": employeeLoginState.accountNumber
+            "bank_acct": employeeLoginState.accountNumber,
+            "pan_no": employeeLoginState.panNumber
         });
         if (response.status === 201) {
 

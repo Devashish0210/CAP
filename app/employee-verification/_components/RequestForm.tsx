@@ -2,7 +2,7 @@
 
 import { getLocalTimeZone, today, parseDate } from "@internationalized/date";
 import { Card, Input, Spinner } from "@nextui-org/react";
-import { DatePicker } from "@nextui-org/date-picker";
+//import { DatePicker } from "@nextui-org/date-picker";
 import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux-toolkit/store";
@@ -12,14 +12,20 @@ import logout from "../_api-helpers/Logout";
 import { Button } from "@nextui-org/react";
 import { useAppDispatch, useAppSelector } from "@/redux-toolkit/hooks";
 import { setState } from "@/redux-toolkit/features/employer-login-state";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { toast } from "react-toastify";
 import ModalComponent from "./ModalComponent";
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
 
 export default function RequestForm() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modaltext, setmodaltext] = useState("");
-  const [value, setValue] = useState(today(getLocalTimeZone()));
+  //@ts-ignore
+  const [value, setValue] = useState(dayjs(today(getLocalTimeZone())));
+  const [dob, setDob] = useState(null);
   const [code, setcode] = useState(0);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [empIDError, setEmpIDError] = useState("");
@@ -30,6 +36,9 @@ export default function RequestForm() {
   const employerLoginState = useAppSelector(
     (state) => state.employerLoginState
   );
+
+  console.log("Hey", today(getLocalTimeZone()));
+  
 
   const [isloading, setisLoading] = useState(false);
 
@@ -51,7 +60,10 @@ export default function RequestForm() {
         email,
         otp,
         employeeID,
+        //@ts-ignore
         value.toDate(getLocalTimeZone()),
+        //@ts-ignore
+        dob.toDate(getLocalTimeZone()),
         dispatch
       )
         .then((response) => {
@@ -94,7 +106,7 @@ export default function RequestForm() {
   };
   return (
     <div className="flex flex-wrap h-[80vh] justify-center items-center gap-8">
-      <Card className="h-[15rem] w-[25rem] flex gap-2 justify-center items-center p-8 font-medium">
+      <Card className="h-[25rem] w-[25rem] flex gap-2 justify-center items-center p-8 font-medium">
         <p>
           To verify employment information, kindly input the Employee ID and the
           last working date.
@@ -104,7 +116,7 @@ export default function RequestForm() {
           address
         </p>
       </Card>
-      <Card className="h-[15rem] w-[25rem] flex gap-2 justify-center items-center p-8 font-medium">
+      <Card className="h-[25rem] w-[25rem] flex gap-2 justify-center items-center p-8 font-medium">
         <form
           className="w-[80%] mx-auto flex flex-col gap-6 mt-8"
           onSubmit={handleValidate}
@@ -133,7 +145,8 @@ export default function RequestForm() {
             // label="Employee ID"
             placeholder="Employee ID"
           />
-          <DatePicker
+
+          {/* <DatePicker
             label="Last Working Day"
             variant="underlined"
             value={value}
@@ -142,7 +155,25 @@ export default function RequestForm() {
             isRequired
             maxValue={today(getLocalTimeZone())}
             minValue={parseDate("1989-08-01")}
-          />
+          /> */}
+          <>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DatePicker
+          label="Last Working Day"
+          value={value}
+          //@ts-ignore
+          onChange={(newValue) => setValue(newValue)}
+          format="DD/MM/YYYY"
+        />
+        <DatePicker
+          label="Employee Date of Birth"
+          value={dob}
+          //@ts-ignore
+          onChange={(newValue) => setDob(newValue)}
+          format="DD/MM/YYYY"
+        />
+         </LocalizationProvider>
+        </>
           <Button color="primary" className="mb-4" type="submit">
             Proceed
           </Button>

@@ -5,7 +5,7 @@ import Recaptcha from "@/app/_components/Recaptcha";
 import { useDispatch } from "react-redux";
 import { setState } from "@/redux-toolkit/features/employee-login-state";
 import { useAppSelector } from "@/redux-toolkit/hooks";
-import { Button, Input, Spinner } from "@nextui-org/react";
+import { Button, Input, Spinner, Switch } from "@nextui-org/react";
 import { Card, CardHeader } from "@nextui-org/react";
 import OtpAuth from "./otp-auth";
 
@@ -28,12 +28,21 @@ export default function LoginCard() {
   const [empIDError, setEmpIDError] = useState("");
   const [formError, setFormError] = useState("");
   const [accNoError, setAccNoError] = useState("");
+
+  const [showPanInput, setShowPanInput] = useState(false); // PAN card input state
+  const [panCard, setPanCard] = useState(""); // PAN card number state
+  const [panCardError, setPanCardError] = useState("");
+
   // Function to validate and submit the form
   const validateEmail = (value: string) =>
     value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
   const validateEmpID = (value: string) => value.match(/^[0-9]+$/i);
   const validateAccNo = (value: string) =>
     value.match(/^[0-9][0-9][0-9][0-9][0-9]$/i);
+
+  const validatePanCard = (value: string) =>
+    value.match(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/i);
+
   const validateForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.target;
@@ -46,6 +55,7 @@ export default function LoginCard() {
           email: email,
           empID: employeeID,
           accountNumber: bank_id,
+          panNumber: panCard,
           otp: null,
         });
         dispatch(
@@ -53,6 +63,7 @@ export default function LoginCard() {
             email: email,
             empID: employeeID,
             accountNumber: bank_id,
+            panNumber: panCard,
             otp: null,
           })
         );
@@ -95,18 +106,20 @@ export default function LoginCard() {
                         email: e.target.value,
                         empID: employeeID,
                         accountNumber: bank_id,
+                        panNumber: panCard,
                         otp: null,
                       })
                     );
                   }}
                   required
                   classNames={{
-                    input: "ml-4 mb-0",
+                    input: "ml-2 mb-0",
                     inputWrapper: "h-10",
                   }}
                   type="email"
+                  size="sm"
                   // label="Email"
-                  placeholder="Please enter your Email ID"
+                  placeholder="Enter your personal email address"
                   startContent={
                     <span className="material-symbols-outlined">mail</span>
                   }
@@ -128,6 +141,7 @@ export default function LoginCard() {
                         email: email,
                         empID: e.target.value,
                         accountNumber: bank_id,
+                        panNumber: panCard,
                         otp: null,
                       })
                     );
@@ -158,6 +172,7 @@ export default function LoginCard() {
                         email: email,
                         empID: employeeID,
                         accountNumber: e.target.value,
+                        panNumber: panCard,
                         otp: null,
                       })
                     );
@@ -176,6 +191,42 @@ export default function LoginCard() {
                   label="Last 5 Digits of Bank Account No."
                   placeholder="Microland Salary Account"
                 />
+
+                  <Input
+                    isInvalid={panCardError.length !== 0}
+                    errorMessage={panCardError}
+                    value={panCard}
+                    onChange={(e) => {
+                      setPanCard(e.target.value);
+                      validatePanCard(e.target.value)
+                        ? setPanCardError("")
+                        : setPanCardError("PAN Card number is invalid");
+                      dispatch(
+                        setState({
+                          email: email,
+                          empID: employeeID,
+                          accountNumber: bank_id,
+                          //@ts-ignore
+                          panCard: e.target.value,
+                          otp: null,
+                        })
+                      );
+                    }}
+                    isRequired={true}
+                    classNames={{
+                      input: "ml-4 mb-0",
+                      inputWrapper: "h-20 -mt-6",
+                    }}
+                    startContent={
+                      <span className="material-symbols-outlined">info</span>
+                    }
+                    type="text"
+                    pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
+                    variant="underlined"
+                    label="PAN Card Number"
+                    placeholder="Enter your PAN Card Number"
+                  />
+                
                 <Button type="submit" color="primary" isDisabled={isCaptcha}>
                   Login
                 </Button>

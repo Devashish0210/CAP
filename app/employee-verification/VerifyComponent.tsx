@@ -30,12 +30,18 @@ export default function VerifyComponent() {
   return (
     <div className="h-[90vh]">
       <div
-        className="absolute h-full w-full blur-lg -z-40"
+        className="absolute h-full w-full -z-30"
         style={{
           backgroundImage: "url('background-employee-verification.jpg')",
           backgroundSize: "100vw 90vh",
         }}
       />
+      <div
+          className="absolute h-full w-full -z-30"
+          style={{
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+          }}
+        ></div>
       {/* To Display Toast Notifications */}
       <ToastContainer pauseOnHover={false} />
 
@@ -64,7 +70,7 @@ export default function VerifyComponent() {
         {/* Video to be displayed in pre-login first and second screen */}
         {!isOtpVerified && (
           <section className="h-[90vh] w-full flex flex-wrap items-center justify-evenly">
-            <div className="text-[3rem]">
+            <div className="text-[3rem] text-white">
               <h1>Welcome to</h1>
               <h1>Employment Verification</h1>
               <h1>Services</h1>

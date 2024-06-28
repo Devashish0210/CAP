@@ -60,7 +60,10 @@ export default function NavBar() {
                 <p className="font-semibold text-xl">Alumni Services</p>
               </Link>
             </div>
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center gap-4">
+              <Link href="https://www.microland.com/careers" target="_blank" className="text-black">
+                <span className="cursor-pointer p-4">Careers</span>
+              </Link>
               <p
                 onClick={() => handleLogout(dispatch, router)}
                 className="flex justify-center items-center cursor-pointer"

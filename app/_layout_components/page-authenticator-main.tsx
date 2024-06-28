@@ -49,7 +49,7 @@ export default function PageAuthenticatorMain({
           if (!response) {
             Cookies.remove("employee_login_state");
             dispatch(
-              setState({ email: "", otp: null, accountNumber: "", empID: "" })
+              setState({ email: "", otp: null, accountNumber: "", empID: "", panNumber: "" })
             );
             if (!(path === "/")) {
               router.push("/");

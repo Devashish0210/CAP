@@ -82,6 +82,7 @@ export default function OtpAuth({ email }: OtpProps) {
                 email: "",
                 empID: "",
                 accountNumber: "",
+                panNumber: "",
                 otp: null,
               })
             );

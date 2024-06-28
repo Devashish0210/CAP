@@ -10,6 +10,7 @@ const handleLogout = (dispatch, router) => {
         email: "",
         empID: "",
         accountNumber: "",
+        panNumber: "",
         otp: null
     }))
     router.push("/")

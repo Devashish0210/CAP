@@ -10,16 +10,26 @@ const sendVerificationToBackend = async (
   otp: string,
   employeeNumber: string,
   lastWorkingDay: Date,
+  dob: Date,
   dispatch: any
 ) => {
   try {
     const dateList = lastWorkingDay.toLocaleDateString().split("/");
-    const formattedDate = dateList[2] + "-" + dateList[1] + "-" + dateList[0];
+    dateList[1] = dateList[1].length === 1 ? '0' + dateList[1] : dateList[1];
+    dateList[0] = dateList[0].length === 1 ? '0' + dateList[0] : dateList[0];
+    const formattedDate = dateList[2] + "-" + dateList[0] + "-" + dateList[1];
+
+    const dobList = dob.toLocaleDateString().split("/");
+    dobList[1] = dobList[1].length === 1 ? '0' + dobList[1] : dobList[1];
+    dobList[0] = dobList[0].length === 1 ? '0' + dobList[0] : dobList[0];
+    const formattedDob = dobList[2] + "-" + dobList[0] + "-" + dobList[1];
+
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_BGV_REQUEST_ENDPOINT}`,
       {
         employee_id: employeeNumber,
         last_working_day: formattedDate,
+        dob: formattedDob,
       },
 
       {
