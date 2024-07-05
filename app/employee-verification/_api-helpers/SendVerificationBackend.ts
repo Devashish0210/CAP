@@ -17,12 +17,12 @@ const sendVerificationToBackend = async (
     const dateList = lastWorkingDay.toLocaleDateString().split("/");
     dateList[1] = dateList[1].length === 1 ? '0' + dateList[1] : dateList[1];
     dateList[0] = dateList[0].length === 1 ? '0' + dateList[0] : dateList[0];
-    const formattedDate = dateList[2] + "-" + dateList[0] + "-" + dateList[1];
+    const formattedDate = dateList[2] + "-" + dateList[1] + "-" + dateList[0];
 
     const dobList = dob.toLocaleDateString().split("/");
     dobList[1] = dobList[1].length === 1 ? '0' + dobList[1] : dobList[1];
     dobList[0] = dobList[0].length === 1 ? '0' + dobList[0] : dobList[0];
-    const formattedDob = dobList[2] + "-" + dobList[0] + "-" + dobList[1];
+    const formattedDob = dobList[2] + "-" + dobList[1] + "-" + dobList[0];
 
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_BGV_REQUEST_ENDPOINT}`,

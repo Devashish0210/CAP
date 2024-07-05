@@ -18,17 +18,30 @@ const LoginPage = () => {
           }}
         ></div>
         <div className="relative w-full flex flex-wrap h-full items-center justify-evenly">
-          <div className="text-[3rem] pr-24 text-white">
+          <div className="text-[3rem] pr-24 text-white -mt-8">
             <h1>Welcome to</h1>
             <h1>Microland Alumni</h1>
             <h1>Community</h1>
           </div>
-          <div>
+          <div className="mt-[-4rem] mb-14 md:mb-0 w-full md:w-auto">
             <LoginCard />
           </div>
         </div>
+        <p className="text-white absolute bottom-0 w-full text-center pb-4 md:text-sm">
+          Having trouble logging in? Contact us at{" "}
+          <a
+            href="mailto:alumnisupport@microland.com"
+            className="underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            alumnisupport@microland.com
+          </a>{" "}
+          for assistance.
+        </p>
       </section>
     </>
   );
 };
+
 export default LoginPage;

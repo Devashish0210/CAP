@@ -197,10 +197,11 @@ export default function LoginCard() {
                     errorMessage={panCardError}
                     value={panCard}
                     onChange={(e) => {
-                      setPanCard(e.target.value);
-                      validatePanCard(e.target.value)
+                    const upperCaseValue = e.target.value.toUpperCase();
+                    setPanCard(upperCaseValue);
+                    validatePanCard(upperCaseValue)
                         ? setPanCardError("")
-                        : setPanCardError("PAN Card number is invalid");
+                        : setPanCardError("PAN Number is invalid");
                       dispatch(
                         setState({
                           email: email,
@@ -220,11 +221,11 @@ export default function LoginCard() {
                     startContent={
                       <span className="material-symbols-outlined">info</span>
                     }
-                    type="text"
+                    type="password"
                     pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
                     variant="underlined"
-                    label="PAN Card Number"
-                    placeholder="Enter your PAN Card Number"
+                    label="PAN Number"
+                    placeholder="Enter your PAN Number"
                   />
                 
                 <Button type="submit" color="primary" isDisabled={isCaptcha}>

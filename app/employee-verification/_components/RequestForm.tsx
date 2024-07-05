@@ -108,13 +108,14 @@ export default function RequestForm() {
     <div className="flex flex-wrap h-[80vh] justify-center items-center gap-8">
       <Card className="h-[25rem] w-[25rem] flex gap-2 justify-center items-center p-8 font-medium">
         <p>
-          To verify employment information, kindly input the Employee ID and the
-          last working date.
+        To verify employment information, please provide the following details of the employee:
         </p>
-        <p>
-          Upon successful validation, the details will be sent to your email
-          address
-        </p>
+        <div>
+        <li>Microland employee ID</li>
+        <li>Last working date at Microland</li>
+        <li>Date of birth</li>
+        </div>
+        <p>Upon successful validation, the verified details will be sent to your email address.</p>
       </Card>
       <Card className="h-[25rem] w-[25rem] flex gap-2 justify-center items-center p-8 font-medium">
         <form
@@ -159,7 +160,7 @@ export default function RequestForm() {
           <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
-          label="Last Working Day"
+          label="Last Working Date"
           value={value}
           //@ts-ignore
           onChange={(newValue) => setValue(newValue)}
