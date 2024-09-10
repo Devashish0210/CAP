@@ -8,6 +8,7 @@ type CreateTicket = {
     "ticket_category": string,
     "ticketTitle": string,
     "ticketDetails": string,
+    "mobile": string,
     "attachment_filename": string,
     "attachment": string
 }
@@ -16,6 +17,7 @@ type CreateTicket2 = {
     "ticket_category": string,
     "ticketTitle": string,
     "ticketDetails": string,
+    "mobile": string
 }
 
 const createTickets = async (data: CreateTicket | CreateTicket2, employeeLoginState: InitialState, dispatch: AppDispatch, router: any): Promise<boolean> => {

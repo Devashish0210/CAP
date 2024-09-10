@@ -10,3 +10,4 @@ services:
     environment:
       # Add environment variables here (optional)
       PORT: 3001  # Example environment variable
+    restart: always

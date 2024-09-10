@@ -24,7 +24,7 @@ export default function RequestForm() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modaltext, setmodaltext] = useState("");
   //@ts-ignore
-  const [value, setValue] = useState(dayjs(today(getLocalTimeZone())));
+  const [value, setValue] = useState(null);
   const [dob, setDob] = useState(null);
   const [code, setcode] = useState(0);
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -48,9 +48,23 @@ export default function RequestForm() {
   const otp: any = useSelector(
     (state: RootState) => state.employerLoginState.otp
   );
+  //@ts-ignore
+  const handleDateChange = (newValue, setter) => {
+    setter(newValue);
+  };
+
+  const formatDateForAPI = (date) => {
+    if (date) {
+      return dayjs(date).format('YYYY-MM-DD');
+    }
+    return null;
+  };
+
   const handleValidate = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.target;
+
+    
 
     //@ts-ignore
     if (form.checkValidity()) {
@@ -61,9 +75,9 @@ export default function RequestForm() {
         otp,
         employeeID,
         //@ts-ignore
-        value.toDate(getLocalTimeZone()),
+        formatDateForAPI(value),
         //@ts-ignore
-        dob.toDate(getLocalTimeZone()),
+        formatDateForAPI(dob),
         dispatch
       )
         .then((response) => {
@@ -163,14 +177,14 @@ export default function RequestForm() {
           label="Last Working Date"
           value={value}
           //@ts-ignore
-          onChange={(newValue) => setValue(newValue)}
+          onChange={(newValue) => handleDateChange(newValue, setValue)}
           format="DD/MM/YYYY"
         />
         <DatePicker
           label="Employee Date of Birth"
           value={dob}
           //@ts-ignore
-          onChange={(newValue) => setDob(newValue)}
+          onChange={(newValue) => handleDateChange(newValue, setDob)}
           format="DD/MM/YYYY"
         />
          </LocalizationProvider>
