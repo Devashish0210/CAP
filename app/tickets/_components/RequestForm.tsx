@@ -229,6 +229,7 @@ export default function RequestForm() {
                 setDescription(e.target.value);
               }}
               className="bg-[#F4F4F5] ml-1 mt-1 min-h-2 text-sm w-full"
+              //@ts-ignore
               wrapperClassName="h-2"
               labelClassName="mb-1"
               type="text"
@@ -245,9 +246,12 @@ export default function RequestForm() {
             selectedCategory === null ||
             typeof selectedCategory === "undefined"
               ? "hidden"
+              //@ts-ignore
               : ticketData.data[selectedCategory]["attachment_message"] === "" ||
+              //@ts-ignore
                 ticketData.data[selectedCategory]["attachment_message"] ===
                   null ||
+                  //@ts-ignore
                 typeof ticketData.data[selectedCategory][
                   "attachment_message"
                 ] === "undefined"
@@ -262,6 +266,7 @@ export default function RequestForm() {
             selectedCategory === null ||
             typeof selectedCategory === "undefined"
               ? ""
+              //@ts-ignore
               : ticketData.data[selectedCategory]["attachment_message"]}
           </p>
         </div>

@@ -53,6 +53,7 @@ export default function RequestForm() {
     setter(newValue);
   };
 
+  //@ts-ignore
   const formatDateForAPI = (date) => {
     if (date) {
       return dayjs(date).format('YYYY-MM-DD');
