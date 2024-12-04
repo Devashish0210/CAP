@@ -24,10 +24,11 @@ import { setState } from "@/redux-toolkit/features/create-ticket";
 import createTickets from "../_api-helpers/create-ticket";
 import DropdownCustom from "./Dropdown";
 import MyDropzone from "./CustomDropzone";
+import TableCustom from "./Table";
 
 // Define the RequestForm component
-export default function RequestForm() {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+export default function RequestForm({ onSuccess }: { onSuccess: () => void }) {
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const [selectedKeys, setSelectedKeys] = React.useState(
     new Set(["-- Please Select --"])
   );
@@ -45,6 +46,8 @@ export default function RequestForm() {
   );
   const ticketData = useAppSelector((state) => state.ticketCreate);
   const formLoading = useAppSelector((state) => state.ticketCreate.isLoading);
+  const ticketStatus = useAppSelector((state) => state.ticketStatus);
+  const [showTable, setShowTable] = React.useState(false);
   let selectedCategory: string = "";
   selectedKeys.forEach((element) => {
     selectedCategory = element;
@@ -144,9 +147,23 @@ export default function RequestForm() {
         dispatch,
         router
       );
+      if (showTable) {
+        return <TableCustom items={ticketStatus} />;
+      }
       if (d) {
         setCreateTicketMessage(0);
         setModalMessage("Ticket created successfully");
+        onOpen();
+
+      // setTimeout(() => {
+      //   onClose();
+      //   onSuccess();
+      // }, 5000);
+        // Clear all the fields after successful submission
+        setSelectedKeys(new Set(["-- Please Select --"]));
+        setPhoneNumber("+91");
+        setDescription("");
+        setFiles([]);
       } else {
         setCreateTicketMessage(1);
         setModalMessage("Ticket Creation Failed");
@@ -175,7 +192,10 @@ export default function RequestForm() {
                 <p>{modalMessage}</p>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
+                <Button color="danger" variant="light" onPress={() => {
+              onClose(); // Close the modal
+              onSuccess(); // Call onSuccess immediately after closing
+            }}>
                   Close
                 </Button>
               </ModalFooter>
@@ -186,6 +206,7 @@ export default function RequestForm() {
       <form
         className="flex flex-wrap gap-4 justify-center items-center"
         onSubmit={handleFormSubmit}
+
       >
         <div className={"flex w-full rounded-sm p-4"}>
           <p>

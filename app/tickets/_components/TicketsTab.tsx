@@ -23,6 +23,7 @@ export default function DocumentsTab() {
   const employeeLoginState = useAppSelector(
     (state) => state.employeeLoginState
   );
+  const [activeTab, setActiveTab] = useState("create-ticket");
   const getDetails = async () => {
     const res = await getTickets(employeeLoginState, dispatch, router);
     const data = {
@@ -48,6 +49,8 @@ export default function DocumentsTab() {
         aria-label="Options"
         color="danger"
         variant="underlined"
+        selectedKey={activeTab} // Bind active tab state
+        onSelectionChange={(key) => setActiveTab(key.toString())}
         classNames={{
           tabList:
             "gap-12 w-full relative rounded-none p-0 border-b border-divider",
@@ -57,7 +60,7 @@ export default function DocumentsTab() {
         }}
       >
         <Tab key="create-ticket" title="Create Ticket">
-          <RequestForm />
+        <RequestForm onSuccess={() => setActiveTab("status-ticket")} />
         </Tab>
 
         <Tab
