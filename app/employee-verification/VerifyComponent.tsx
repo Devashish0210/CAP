@@ -37,43 +37,27 @@ export default function VerifyComponent() {
         }}
       />
       <div
-          className="absolute h-full w-full -z-30"
-          style={{
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-          }}
-        ></div>
-      {/* To Display Toast Notifications */}
+        className="absolute h-full w-full -z-30"
+        style={{
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+        }}
+      ></div>
       <ToastContainer pauseOnHover={false} />
 
       <section>
-        {/* Moving Message to be displayed in pre-login screens */}
-        {/* {!isOtpVerified && (
-          <div className="message">
-            <MovingMessage>
-              Welcome to Alumni Employment Verification Portal
-            </MovingMessage>
-          </div>
-        )} */}
-
-        {/* HeroMessage to be displayed in post-login screen */}
-        {/* {isOtpVerified && (
-          <div className="hero-message mt-4">
-            <p style={{ margin: "0", padding: "0", fontSize: "small" }}>
-              &#9432;&nbsp;To verify employment information, kindly input the{" "}
-              <u>Employee ID</u> and the <u>last working date</u>. Upon
-              successful validation, the details will be sent to your email
-              address
-            </p>
-          </div>
-        )} */}
-
-        {/* Video to be displayed in pre-login first and second screen */}
         {!isOtpVerified && (
           <section className="h-[90vh] w-full flex flex-wrap items-center justify-evenly">
-            <div className="text-[3rem] text-white">
-              <h1>Welcome to</h1>
-              <h1>Employment Verification</h1>
-              <h1>Services</h1>
+            <div className="text-[3rem] pr-24 text-white -mt-8 max-md:text-[2rem] max-md:pr-0 max-md:pl-4 max-md:w-full max-md:-mt-16">
+              <h1 className="max-md:hidden">Welcome to</h1>
+              <h1 className="max-md:hidden">Employment Verification</h1>
+              <h1 className="max-md:hidden">Services</h1>
+
+              <div className="hidden max-md:block max-md:leading-tight">
+                <h1>Welcome to</h1>
+                <h1>Employment</h1>
+                <h1>Verification</h1>
+                <h1>Services</h1>
+              </div>
             </div>
             {!showOtp ? (
               <EmailComponentMobile
@@ -84,7 +68,6 @@ export default function VerifyComponent() {
               />
             ) : (
               <OtpComponentMobile
-                // setTableData={setTableData}
                 setShowOtp={setShowOtp}
                 setClickCount={setClickCount}
                 setupdateddisabled={setupdateddisabled}
@@ -95,7 +78,6 @@ export default function VerifyComponent() {
           </section>
         )}
 
-        {/* RequestForm to be displayed in post-login screen */}
         {isOtpVerified && (
           <>
             <RequestForm></RequestForm>

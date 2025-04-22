@@ -16,7 +16,16 @@ export default function PageContainer({
   const path = usePathname();
   const router = useRouter();
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    const bypassRoutes = ["/adminui/login", "/adminui/main", "/service-down"];
+
+    if (bypassRoutes.includes(path)) {
+      setLoading(false);
+      return;
+    }
+
     const wait = async () => {
       const res = await checkServerStatus();
       if (res) {
@@ -25,17 +34,17 @@ export default function PageContainer({
         router.push("/service-down");
       }
     };
-    if (path === "/service-down") {
-      setLoading(false);
-    } else {
-      wait();
-    }
+
+    wait();
   }, [path]);
 
-  const [loading, setLoading] = useState(true);
-  return loading ? (
-    <Loading />
-  ) : path === "/employee-verification" ? (
+  if (loading) return <Loading />;
+
+  if (path === "/adminui/login" || path === "/adminui/main") {
+    return <>{children}</>; // No wrapper for these routes
+  }
+
+  return path === "/employee-verification" ? (
     <PageAuthenticatorBGV>{children}</PageAuthenticatorBGV>
   ) : (
     <PageAuthenticatorMain path={path}>{children}</PageAuthenticatorMain>

@@ -12,8 +12,8 @@ export default function NavBar() {
             wrapper: "px-0 max-w-full",
           }}
         >
-          <div className="flex h-full w-full justify-between items-center px-8">
-            <div className="flex gap-4 items-center justify-start">
+          <div className="flex h-full w-full justify-between items-center px-4 sm:px-8">
+            <div className="flex gap-2 sm:gap-4 items-center justify-start">
               <Link href="https://www.microland.com">
                 <img
                   src="/microland-logo-main.png"
@@ -21,14 +21,14 @@ export default function NavBar() {
                   className="h-6 object-contain"
                 />
               </Link>
-              <p className="text-3xl font-thin">|</p>
+              <p className="text-3xl font-thin hidden sm:block">|</p>
               <Link href="/" className="text-black">
-                <p className="font-semibold text-xl">Alumni Services</p>
+                <p className="font-semibold text-xs sm:text-xl">Alumni Services</p>
               </Link>
             </div>
             <div className="flex items-center justify-end">
               <Link href="/employee-verification">
-                <p className="font-bold text-xs md:text-base">
+                <p className="font-bold text-xs sm:text-base">
                   Employment Verification Request
                 </p>
               </Link>
