@@ -40,7 +40,11 @@ export default function PageContainer({
 
   if (loading) return <Loading />;
 
-  if (path === "/adminui/login" || path === "/adminui/main") {
+  if (
+    path === "/adminui/login" ||
+    path === "/adminui/main" ||
+    "/adminui/remove-ndc"
+  ) {
     return <>{children}</>; // No wrapper for these routes
   }
 

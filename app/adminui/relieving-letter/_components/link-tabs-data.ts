@@ -10,7 +10,7 @@ export const linkTabsData = {
     },
     {
       title: "Relieving Letter Exempt",
-      href: "/adminui/relieving-letter",
+      href: "/adminui/main",
     },
   ],
   style: {

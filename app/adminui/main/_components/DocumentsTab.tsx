@@ -1,18 +1,71 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Button, Input } from "@nextui-org/react";
 import LinkTabs from "@/app/_components/link-tabs";
 import { linkTabsData } from "./link-tabs-data";
 import { getCookie, hasCookie } from "@/app/utils/cookieManager";
 import { Download } from "lucide-react";
-
+import { useRouter } from "next/navigation";
 
 export default function PFUploaderTab() {
   const [file, setFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const [message, setMessage] = useState({ text: "", type: "" });
   const fileInputRef = useRef(null);
+  const router = useRouter();
+  const authCheckIntervalRef = useRef(null);
+
+  // Function to check if user is still authenticated
+  const checkAuthentication = async () => {
+    try {
+      const email = getCookie('userEmail');
+      const otp = getCookie('userOtp');
+
+      if (!email || !otp) {
+        return false;
+      }
+
+      const response = await fetch('https://alumniapi.microland.com/adminui/is-allowed', {
+        method: 'POST',
+        headers: {
+          'X-EMAIL': email,
+          'X-OTP': otp
+        }
+      });
+
+      // Focus on the HTTP status code
+      if (response.status !== 200) {
+        return false;
+      }
+
+      // Double check the data content
+      const data = await response.json();
+      return data && data.is_active === true;
+    } catch (error) {
+      console.error("Error checking authentication:", error);
+      return false;
+    }
+  };
+
+  // Function to handle logout when authentication fails
+  const handleAuthFailure = () => {
+    setMessage({
+      text: "Your session has expired. Redirecting to login page...",
+      type: "error"
+    });
+
+    // Clear any ongoing authentication check interval
+    if (authCheckIntervalRef.current) {
+      clearInterval(authCheckIntervalRef.current);
+    }
+
+    // Redirect to login page after a short delay
+    setTimeout(() => {
+      router.push('/adminui/login');
+    }, 2000);
+  };
+
 
   // Function to convert file to base64
   //@ts-ignore
@@ -89,7 +142,15 @@ export default function PFUploaderTab() {
     setMessage({ text: "", type: "" });
 
     try {
-      // First validate the CSV
+      // First check authentication status by calling is-allowed API
+      const isAuthenticated = await checkAuthentication();
+
+      if (!isAuthenticated) {
+        handleAuthFailure();
+        return;
+      }
+
+      // Now validate the CSV
       try {
         await validateCSV(file);
       } catch (validationError) {
@@ -101,24 +162,15 @@ export default function PFUploaderTab() {
 
       // Convert file to base64
       const base64Data = await fileToBase64(file);
-      console.log("File converted to base64");
 
       // Get user credentials from cookies
       const email = getCookie('userEmail');
       const otp = getCookie('userOtp');
 
-      if (!email || !otp) {
-        setMessage({
-          text: "Authentication credentials not found or expired. Please login again.",
-          type: "error"
-        });
-        setIsUploading(false);
-        return;
-      }
-
       // Upload file
       const response = await fetch('https://alumniapi.microland.com/adminui/upload-csv', {
         method: 'POST',
+        //@ts-ignore
         headers: {
           'X-EMAIL': email,
           'X-OTP': otp,
@@ -126,6 +178,15 @@ export default function PFUploaderTab() {
         },
         body: JSON.stringify({ csv: base64Data })
       });
+
+
+      // Make a specific check to see if this is an auth error
+      const isAuthStillValid = await checkAuthentication();
+      if (!isAuthStillValid) {
+        handleAuthFailure();
+        return;
+      }
+
 
       let result;
       const contentType = response.headers.get("content-type");
@@ -137,11 +198,8 @@ export default function PFUploaderTab() {
         result = { message: text };
       }
 
-      console.log("Result is: ", result);
-
       // Special handling for the "No records inserted" response
       if (Array.isArray(result) && result[0] === "No records inserted") {
-        // This is actually a successful response, just with no new records
         setMessage({
           text: "Upload completed. No new records were inserted. This might be because the records already exist or there were validation issues with the data.",
           type: "warning"
@@ -155,7 +213,6 @@ export default function PFUploaderTab() {
       }
 
       if (response.ok) {
-        console.log("Upload successful:", result);
         setMessage({
           text: `Upload successful: ${JSON.stringify(result)}`,
           type: "success"
@@ -167,7 +224,6 @@ export default function PFUploaderTab() {
           fileInputRef.current.value = "";
         }
       } else {
-        console.error("Upload failed:", result);
         let errorMessage = "Failed to upload CSV file. Please try again.";
 
         // Extract meaningful error message if available
@@ -184,6 +240,14 @@ export default function PFUploaderTab() {
       }
     } catch (error) {
       console.error("Error uploading file:", error);
+
+      // Check if error is related to authentication
+      const isAuthStillValid = await checkAuthentication();
+      if (!isAuthStillValid) {
+        handleAuthFailure();
+        return;
+      }
+
       setMessage({
         text: "An error occurred during the upload process. Please try again.",
         type: "error"
@@ -261,6 +325,7 @@ export default function PFUploaderTab() {
               <li>The file will be processed immediately after upload</li>
               <li>If the CSV contains errors, no new rows will be uploaded</li>
               <li>Existing records with the same Employee ID will be updated</li>
+              <li>Your session expires after 5 minutes. You will be redirected to the login page if your session expires.</li>
             </ul>
           </div>
         </div>

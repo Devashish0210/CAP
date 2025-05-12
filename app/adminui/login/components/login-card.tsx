@@ -6,7 +6,7 @@ import { setState } from "@/redux-toolkit/features/employee-login-state";
 import { Button, Input, Spinner } from "@nextui-org/react";
 import { Card } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
-import setCookie from "@/app/employee-verification/_api-helpers/SetCookie";
+import { setCookie } from "@/app/utils/cookieManager";
 
 export default function LoginCard() {
     const dispatch = useDispatch();
@@ -116,13 +116,13 @@ export default function LoginCard() {
 
 
                 if (adminCheckResponse.ok && adminData.is_active === true) {
-                    // ✅ Save user data in cookies with 5 minutes expiration
+                    // ✅ Save user data in cookies with 15 minutes expiration
                     //@ts-ignore
-                    setCookie("userEmail", email, 5 / 60); // 5 minutes (5/60 hours)
+                    setCookie("userEmail", email, 0.25);
                     //@ts-ignore
-                    setCookie("userOtp", otp, 5 / 60); // 5 minutes (5/60 hours)
+                    setCookie("userOtp", otp, 0.25);
                     //@ts-ignore
-                    setCookie("userData", JSON.stringify(adminData), 5 / 60); // 5 minutes (5/60 hours)
+                    setCookie("userData", JSON.stringify(adminData), 0.25);
 
                     // Update redux state with validated status and user role
                     dispatch(
