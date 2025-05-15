@@ -297,7 +297,7 @@ export default function NDCRemoverTab() {
               className="px-6"
               size="lg"
             >
-              Add NDC Reminder
+              Add Employee to NDC Reminder Cancellation List
             </Button>
           </form>
 
@@ -314,7 +314,9 @@ export default function NDCRemoverTab() {
           )}
 
           <div className="mt-8">
-            <h3 className="text-lg font-medium mb-4">NDC Reminders</h3>
+            <h3 className="text-lg font-medium mb-4">
+              NDC Reminder Cancellation List
+            </h3>
 
             {isLoading ? (
               <div className="text-center py-8">Loading...</div>
@@ -365,7 +367,7 @@ export default function NDCRemoverTab() {
             )}
           </div>
 
-          <div className="mt-8">
+          {/* <div className="mt-8">
             <h3 className="font-medium mb-2">Notes:</h3>
             <ul className="list-disc pl-5 space-y-1">
               <li>
@@ -379,7 +381,7 @@ export default function NDCRemoverTab() {
                 the login page if your session expires.
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
