@@ -17,34 +17,29 @@ import LinkTabs from "@/app/_components/link-tabs";
 import { linkTabsData } from "@/app/_components/link-tabs-data";
 import NameComponent from "@/app/_components/name-component";
 
-// Helper to map the Redux rows -> Partial<Ndc> for the table
 function toNdc(rows: { name: string; status: string; comment: string }[]) {
-  const get = (owner: string) => rows.find(r => r.name === owner) ?? { status: undefined, comment: undefined };
+  const norm = (s?: string) => (s ?? "").trim().toLowerCase();
+  const by = (label: string) => rows.find(r => norm(r.name) === norm(label)) ?? { status: "Pending", comment: "" };
+
+  const pendingIfUnknown = (s?: string) => {
+  const v = (s ?? "").trim().toLowerCase();
+  return v === "unknown" || v === "na" || v === "not available" ? "" : (s ?? "").trim();
+};
+
+  const rm    = by("Reporting Manager");
+  const fin   = by("Finance");
+  const adm   = by("Admin");
+  const cis   = by("CIS");
+  const hrss  = by("HRSS");
+  const pay   = by("Final Settlement");
 
   return {
-    // Reporting Manager
-    rmNdcStatus:   get("Reporting Manager").status,
-    rmNdcComment:  get("Reporting Manager").comment,
-
-    // Finance
-    financeNdcStatus:  get("Finance").status,
-    financeNdcComment: get("Finance").comment,
-
-    // Admin
-    adminNdcStatus:  get("Admin").status,
-    adminNdcComment: get("Admin").comment,
-
-    // CIS
-    cisNdcStatus:  get("CIS").status,
-    cisNdcComment: get("CIS").comment,
-
-    // HRSS
-    hrssNdcStatus:  get("HRSS").status,
-    hrssNdcComment: get("HRSS").comment,
-
-    // Final Settlement (Payroll)
-    payrollNdcStatus:  get("Final Settlement").status,
-    payrollNdcComment: get("Final Settlement").comment,
+    rmNdcStatus: rm.status,       rmNdcComment: rm.comment,
+    financeNdcStatus: fin.status, financeNdcComment: fin.comment,
+    adminNdcStatus: adm.status,   adminNdcComment: adm.comment,
+    cisNdcStatus: cis.status,     cisNdcComment: cis.comment,
+    hrssNdcStatus: hrss.status,   hrssNdcComment: hrss.comment,
+    payrollNdcStatus: pay.status, payrollNdcComment: pay.comment,
   } as const;
 }
 
@@ -119,6 +114,11 @@ export default function DocumentsTab({
   const handleReloadClick = () => {
     dispatch(setState(emptyNDCSTate));
   };
+
+console.log("[ndc] slice state", ndc);               // shape: { data: rows[], isLoading } 
+console.log("[ndc] adapter input rows", ndc.data);   // rows for toNdc
+console.log("[ndc] partial ndc", toNdc(ndc.data));   // keys that Table expects
+
 
   return (
     <div className="w-full">
