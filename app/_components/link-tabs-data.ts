@@ -2,7 +2,7 @@ export const linkTabsData = {
   data: [
     {
       title: "Self-Service",
-      href: "/documents",
+      href: "/documents?tab=ndc",
     },
     {
       title: "FAQs",

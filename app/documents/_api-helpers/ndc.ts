@@ -3,6 +3,24 @@ import { InitialState } from "@/redux-toolkit/features/employee-login-state";
 import handleLogout from "../../_api-helpers/LogOut";
 import { AppDispatch } from "@/redux-toolkit/store";
 
+export type NdcRecord = {
+    cisNdcStatus?: string;
+    cisNdcComment?: string;
+};
+
+export async function fetchNdc(): Promise<NdcRecord> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/ndc`, { cache: "no-store" });
+  if (!res.ok) throw new Error("Failed to load NDC");
+  const data = await res.json();
+
+  // Adapt incoming shape to what the UI expects
+  return {
+    ...data,
+    cisNdcStatus: data?.cis?.status ?? data?.cisStatus ?? "",
+    cisNdcComment: data?.cis?.comment ?? data?.cisComment ?? "",
+  };
+}
+
 const getNDC = async (employeeLoginState: InitialState, dispatch: AppDispatch, router: any) => {
     try {
         const response = await axios.post(process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/alumni/ndc-details", {}, {

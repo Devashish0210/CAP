@@ -107,6 +107,7 @@ export default function DocumentsTab({
             aria-label="Options"
             color="danger"
             variant="underlined"
+            defaultSelectedKey={"ndc"}
             classNames={{
               tabList:
                 "gap-12 w-full relative rounded-none p-0 border-b border-divider",
@@ -115,17 +116,6 @@ export default function DocumentsTab({
               tabContent: "group-data-[selected=true]:text-[#06b6d4]",
             }}
           >
-            <Tab
-              key="documents"
-              title={
-                <div className="flex items-center space-x-2">
-                  <span>My Documents</span>
-                </div>
-              }
-            >
-              {children}
-            </Tab>
-
             {!ndc.isLoading && !isNdcStausFinished(ndc) && (
               <Tab
                 key="ndc"
@@ -138,6 +128,17 @@ export default function DocumentsTab({
                 <TableCustom items={ndc} />
               </Tab>
             )}
+
+              <Tab
+              key="documents"
+              title={
+                <div className="flex items-center space-x-2">
+                  <span>My Documents</span>
+                </div>
+              }
+            >
+              {children}
+            </Tab>
 
             {/* New Tab for the reload icon */}
             {true && (
