@@ -17,6 +17,38 @@ import LinkTabs from "@/app/_components/link-tabs";
 import { linkTabsData } from "@/app/_components/link-tabs-data";
 import NameComponent from "@/app/_components/name-component";
 
+// Helper to map the Redux rows -> Partial<Ndc> for the table
+function toNdc(rows: { name: string; status: string; comment: string }[]) {
+  const get = (owner: string) => rows.find(r => r.name === owner) ?? { status: undefined, comment: undefined };
+
+  return {
+    // Reporting Manager
+    rmNdcStatus:   get("Reporting Manager").status,
+    rmNdcComment:  get("Reporting Manager").comment,
+
+    // Finance
+    financeNdcStatus:  get("Finance").status,
+    financeNdcComment: get("Finance").comment,
+
+    // Admin
+    adminNdcStatus:  get("Admin").status,
+    adminNdcComment: get("Admin").comment,
+
+    // CIS
+    cisNdcStatus:  get("CIS").status,
+    cisNdcComment: get("CIS").comment,
+
+    // HRSS
+    hrssNdcStatus:  get("HRSS").status,
+    hrssNdcComment: get("HRSS").comment,
+
+    // Final Settlement (Payroll)
+    payrollNdcStatus:  get("Final Settlement").status,
+    payrollNdcComment: get("Final Settlement").comment,
+  } as const;
+}
+
+
 export default function DocumentsTab({
   children,
 }: {
@@ -125,7 +157,7 @@ export default function DocumentsTab({
                   </div>
                 }
               >
-                <TableCustom items={ndc} />
+                <TableCustom ndc={toNdc(ndc.data)} />
               </Tab>
             )}
 
