@@ -12,20 +12,23 @@ const getEmployeeDetails = async (employeeLoginState: InitialState, dispatch: Ap
                 'X-EMPID': employeeLoginState.empID
             }
         });
+        // console.log("Employee Details Response:", response);
         if (response.status === 403) {
             handleLogout(dispatch, router)
+            // console.log("Employee Details Response: Forbidden");
             return { "doj": "", "lwd": "", "name": "", "title": "", "empID": "" }
         }
         return response.data;
     } catch (err) {
+        // console.log("Error fetching employee details:", err);
         if (axios.isAxiosError(err)) {
             if (err.response && err.response.status === 403) {
                 handleLogout(dispatch, router)
             } else {
-                console.log(err)
+                // console.log(err)
             }
         } else {
-            console.log(err)
+            // console.log(err)
         }
         return { "doj": "", "lwd": "", "name": "", "title": "", "empID": "" };
     }

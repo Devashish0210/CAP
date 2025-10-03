@@ -16,6 +16,7 @@ import {
   deriveRelievingLetter,
   deriveServiceLetter,
   deriveFullFinalWithLwd,
+  displayStatus,
 } from "./ndcLogic";
 
 type Props = { ndc?: Partial<Ndc> };
@@ -38,6 +39,7 @@ export default function NdcTable({ ndc }: Props) {
 
   // Payroll row (status/comment always populated through deriveFullFinalWithLwd + default mapping)
   const ff = deriveFullFinalWithLwd(d);
+  const payrollStatus = displayStatus(d.payrollNdcStatus);
 
   // Document rows (always populated)
   const rl = deriveRelievingLetter(d);
@@ -50,7 +52,7 @@ export default function NdcTable({ ndc }: Props) {
     { id: "cis",     owner: "CIS",               status: cis.status,     comment: cis.comment },
     { id: "hrss",    owner: "HRSS",              status: hrss.status,    comment: hrss.comment },
 
-    { id: "payroll", owner: "Final Settlement",  status: "Pending",      comment: ff.statusText },
+    { id: "payroll", owner: "Final Settlement", status: payrollStatus, comment: ff.statusText },
 
     { id: "rl",      owner: "Relieving Letter",  status: rl.statusText,  comment: rl.commentText },
     { id: "sl",      owner: "Service Letter",    status: sl.statusText,  comment: sl.commentText },

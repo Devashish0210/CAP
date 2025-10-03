@@ -25,6 +25,7 @@ export default function NavBar() {
           router
         );
         const data = await response;
+        // console.log("Fetched Employee Details:", data);
         dispatch(
           setState({
             doj: data["doj"],

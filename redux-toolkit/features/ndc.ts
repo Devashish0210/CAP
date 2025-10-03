@@ -6,6 +6,7 @@ export type InitialState = {
         status: string,
         comment: string
     }[], isLoading: boolean
+    extras?: { ffStatus?: string; ffNegativeButSettled?: boolean; lwdDate?: string };
 }
 
 const initialState: InitialState = {
@@ -34,18 +35,21 @@ const initialState: InitialState = {
         name: "Final Settlement",
         status: "",
         comment: "",
-    }], isLoading: true
+    }], isLoading: true,
+    extras: undefined,
 }
 
-export const ndcSlice = createSlice({
-    name: "ndc",
-    initialState: initialState,
-    reducers: {
-        setState: (state, action: PayloadAction<InitialState>) => {
-            return action.payload
-        }
-    }
-})
+const ndcSlice = createSlice({
+  name: "ndc",
+  initialState,
+  reducers: {
+    setState(state, action: PayloadAction<InitialState>) {
+      state.isLoading = action.payload.isLoading;
+      state.data = action.payload.data;
+      state.extras = action.payload.extras; 
+    },
+  },
+});
 
 export const { setState } = ndcSlice.actions;
 export { initialState }

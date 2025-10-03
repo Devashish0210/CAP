@@ -80,8 +80,11 @@ function ordinal(n: number) {
     default: return `${n}th`;
   }
 }
-export function formatLwdOrDefault(iso?: string) {
-  const d = iso && !isNaN(Date.parse(iso)) ? new Date(iso) : new Date("2025-04-01");
+export function formatLwd(iso?: string): string | undefined {
+  if (!iso) return undefined;
+  const t = Date.parse(iso);
+  if (Number.isNaN(t)) return undefined;
+  const d = new Date(t);
   const day = ordinal(d.getDate());
   const month = d.toLocaleString("en-GB", { month: "long" });
   const year = d.getFullYear();
@@ -166,16 +169,16 @@ export function deriveFullFinalWithLwd(ndc?: Partial<Ndc>) {
   }
 
   if (payrollPending) {
-    const lwd = formatLwdOrDefault(d.lwdDate);
+    const lwd = formatLwd(d.lwdDate);
+    const prefix = lwd ? `Your Last Working Day was ${lwd}. ` : "";
     return {
       statusText:
-        `Your Last Working Day was ${lwd}. ` +
+        prefix +
         "Subject to NDC clearance completion, Final Settlement processing requires a minimum of 15 days. " +
         "Please revisit this page after 15 calendar days from your LWD",
     };
   }
 
-  // Any other custom payroll status
   return { statusText: displayStatus(d.payrollNdcStatus) || "Pending" };
 }
 
