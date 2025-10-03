@@ -59,7 +59,8 @@ export default function NdcTable({ ndc }: Props) {
   ];
 
   return (
-    <Table
+    <div>
+      <Table
       aria-label="My NDC Status"
       removeWrapper
       classNames={{
@@ -88,5 +89,13 @@ export default function NdcTable({ ndc }: Props) {
         )}
       </TableBody>
     </Table>
+    <div className="mt-4 p-3 bg-green-50 border-l-4 border-green-400 rounded-r-md">
+        <p className="text-sm text-green-800">
+          <strong>Note:</strong> In case of pending NDC clearance, please
+          coordinate with respective department POC for clearance or raise AskML
+          ticket
+        </p>
+      </div>
+    </div>
   );
 }
