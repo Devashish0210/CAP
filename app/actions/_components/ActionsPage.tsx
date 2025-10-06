@@ -12,23 +12,23 @@ const ActionsPage = () => {
           <DetailsCard />
           <CardLink
             href="/documents"
-            bodyText=" Click here for NDC status, Final Settlement, Relieving or Service letter, Payslips, PF statement, Form16 and more."
+            bodyText=" Click here for NDC status, Final Settlement, Relieving or Service letter, Payslips, PF statement, Form16 and more"
             headerText="Self-Service"
-            className="bg-[#5591B7] text-background w-[15rem] h-[27rem] rounded-sm"
+            className="bg-[#5591B7] text-background w-[16rem] h-[26rem] rounded-xl overflow-hidden"
             icon="self-service.png"
           />
           <CardLink
             href="/faqs"
             bodyText="Read frequently asked questions after the exit process."
             headerText="FAQs"
-            className="bg-[#3A577E] text-background w-[15rem] h-[27rem] rounded-sm"
+            className="bg-[#3A577E] text-background w-[16rem] h-[26rem] rounded-xl overflow-hidden"
             icon="faq.png"
           />
           <CardLink
             href="/tickets"
             bodyText="Raise a ticket with Admin, CIS, Finance and HR teams."
             headerText="Raise a Ticket"
-            className="bg-[#003A69] text-background w-[15rem] h-[27rem] rounded-sm"
+            className="bg-[#003A69] text-background w-[16rem] h-[26rem] rounded-xl overflow-hidden"
             icon="tickets.png"
           />
           {/* <CardLink

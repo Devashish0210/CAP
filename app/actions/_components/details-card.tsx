@@ -3,6 +3,7 @@ import { useAppSelector } from "@/redux-toolkit/hooks";
 
 export default function DetailsCard() {
   const employeeDetails = useAppSelector((state) => state.employeeDetails);
+  // console.log("Employee Details from Redux:", employeeDetails);
 
   return (
     <>
